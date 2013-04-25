@@ -7,11 +7,13 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using Tim.UI.Phone.Model;
 
 namespace Tim.UI.Phone.ViewModels
 {
     public class ExpenseViewModel : INotifyPropertyChanged
     {
+        #region Fields
         private int _expenseId;
         /// <summary>
         /// Expense Identifier
@@ -74,7 +76,9 @@ namespace Tim.UI.Phone.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region INotifyPropertyChanged Methods
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {
@@ -84,5 +88,14 @@ namespace Tim.UI.Phone.ViewModels
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+        #endregion
+
+        #region CRUD
+        public int CreateExpense(string Title, int Amount)
+        {
+            var connection = new Connection();
+            return connection.DbConn.Insert(new Expense() { Title = Title, Amount = Amount });
+        }
+        #endregion
     }
 }

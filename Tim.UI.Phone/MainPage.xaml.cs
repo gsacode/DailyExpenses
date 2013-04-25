@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Media;
+using Tim.UI.Phone.ViewModels;
 
 namespace Tim.UI.Phone
 {
@@ -61,10 +62,10 @@ namespace Tim.UI.Phone
                 switch (tbLostFocus.Name)
                 {
                     case "tbAmount":
-                        tbLostFocus.Text = "Amount";
+                        tbLostFocus.SelectedText = "Amount";
                         break;
                     case "tbTitle":
-                        tbLostFocus.Text = "Title";
+                        tbLostFocus.SelectedText = "Title";
                         break;
                 }
             }
@@ -72,7 +73,13 @@ namespace Tim.UI.Phone
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-
+            if (String.IsNullOrEmpty(tbTitle.Text) || String.IsNullOrEmpty(tbAmount.Text))
+                return;
+            var expenseViewModel = new ExpenseViewModel();
+            int id = expenseViewModel.CreateExpense(tbTitle.Text, Convert.ToInt32(tbAmount.Text));
+            Console.WriteLine(id);
+            tbTitle.Text = "";
+            tbAmount.Text = "";
         }
     }
 }

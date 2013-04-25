@@ -37,7 +37,7 @@
                     <TextBox x:Name="tbTitle" Grid.Row="0" GotFocus="WatermarkTB_GotFocus"
                         LostFocus="WatermarkTB_LostFocus" Text="Title" Foreground="Gray"
                         MaxLength="20"></TextBox>
-                    <TextBox x:Name="tbAmount" Grid.Row="1" GotFocus="WatermarkTB_GotFocus"
+                    <TextBox x:Name="tbAmount" InputScope="Number" Grid.Row="1" GotFocus="WatermarkTB_GotFocus"
                         LostFocus="WatermarkTB_LostFocus" Text="Amount" Foreground="Gray"></TextBox>
                     <toolkit:ListPicker x:Name="lpLabels" Grid.Row="2">
                         <toolkit:ListPicker.ItemTemplate>

@@ -9,7 +9,7 @@ using Windows.Storage;
 
 namespace Tim.UI.Phone.Model
 {
-    public class Model
+    public class Connection
     {
         /// <summary>
         /// The database path.
@@ -31,7 +31,7 @@ namespace Tim.UI.Phone.Model
             set { dbConn = value; }
         }
 
-        public Model()
+        public Connection()
         {
             dbConn = new SQLiteConnection(Path.Combine(ApplicationData.Current.LocalFolder.Path, "expense.sqlite"));
             CreateTables();
@@ -39,9 +39,13 @@ namespace Tim.UI.Phone.Model
 
         private void CreateTables()
         {
-            if (dbConn.GetTableInfo("Expense") == null)
+            if (dbConn.GetTableInfo("Expense").Count() == 0)
             {
                 dbConn.CreateTable<Expense>();
+            }
+            if (dbConn.GetTableInfo("Label").Count() == 0)
+            {
+                dbConn.CreateTable<Label>();
             }
         }
     }
